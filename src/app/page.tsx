@@ -186,14 +186,14 @@ export default function Home() {
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 w-full mt-4">
                 {/* Polaroid 1 (Local Image) */}
                 <div className="bg-white p-3 pb-6 rounded-lg shadow-lg transform rotate-[-3deg] transition-transform duration-300 hover:rotate-0 hover:scale-105 hover:z-20 cursor-pointer">
-                  <div className="relative w-full h-40 bg-neutral-100 rounded overflow-hidden">
+                  <div className="relative w-full aspect-square bg-neutral-100 rounded overflow-hidden">
                     <Image
                       src="/images/album1.webp"
                       alt="A Jar of Wishes"
                       fill
                       sizes="(max-width: 768px) 100vw, 33vw"
                       className="object-cover animate-fade-in"
-                      style={{ objectPosition: "center 15%" }}
+                      style={{ objectPosition: "center 10%" }}
                     />
                   </div>
                   <p className="font-display italic text-xs text-neutral-800 text-center mt-3 font-semibold">
@@ -203,14 +203,14 @@ export default function Home() {
 
                 {/* Polaroid 2 (Local Image) */}
                 <div className="bg-white p-3 pb-6 rounded-lg shadow-lg transform rotate-[1deg] transition-transform duration-300 hover:rotate-0 hover:scale-105 hover:z-20 cursor-pointer">
-                  <div className="relative w-full h-40 bg-neutral-100 rounded overflow-hidden">
+                  <div className="relative w-full aspect-square bg-neutral-100 rounded overflow-hidden">
                     <Image
                       src="/images/album2.webp"
                       alt="The Night We Met"
                       fill
                       sizes="(max-width: 768px) 100vw, 33vw"
                       className="object-cover animate-fade-in"
-                      style={{ objectPosition: "center 15%" }}
+                      style={{ objectPosition: "center 10%" }}
                     />
                   </div>
                   <p className="font-display italic text-xs text-neutral-800 text-center mt-3 font-semibold">
@@ -220,7 +220,7 @@ export default function Home() {
 
                 {/* Polaroid 3 (Local Image) */}
                 <div className="bg-white p-3 pb-6 rounded-lg shadow-lg transform rotate-[4deg] transition-transform duration-300 hover:rotate-0 hover:scale-105 hover:z-20 cursor-pointer">
-                  <div className="relative w-full h-40 bg-neutral-100 rounded overflow-hidden">
+                  <div className="relative w-full aspect-square bg-neutral-100 rounded overflow-hidden">
                     <Image
                       src="/images/album3.webp"
                       alt="Best Friends Always"
