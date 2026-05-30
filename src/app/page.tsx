@@ -7,6 +7,18 @@ import StarJar from "@/components/StarJar";
 import CakeSection from "@/components/CakeSection";
 import { Sparkles, Heart, RotateCcw } from "lucide-react";
 import Image from "next/image";
+import PhotoGallery from "@/components/PhotoGallery";
+
+const ALBUM_ITEMS = [
+  { src: "/images/album1.webp", title: "A Jar of Wishes" },
+  { src: "/images/album2.webp", title: "The Night We Met" },
+  { src: "/images/album3.webp", title: "Best Friends Always" },
+  { src: "/images/memory1.webp", title: "Our Great Friendship" },
+  { src: "/images/memory2.webp", title: "First Hangout" },
+  { src: "/images/memory3.webp", title: "Late Night Chats" },
+  { src: "/images/memory4.webp", title: "Your Joyous Laugh" },
+  { src: "/images/memory5.webp", title: "Simple Fun Times" },
+];
 
 type Stage = "intro" | "jar" | "cake" | "reveal";
 
@@ -177,63 +189,14 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Polaroid Memory Gallery */}
+            {/* Polaroid Memory Gallery - Interactive 3D Stack */}
             <div className="w-full flex flex-col items-center gap-6 mb-8">
               <h3 className="text-xl font-display font-semibold text-gold-accent uppercase tracking-widest flex items-center gap-2">
                 <Sparkles size={16} /> Our Starry Album <Sparkles size={16} />
               </h3>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 w-full mt-4">
-                {/* Polaroid 1 (Local Image) */}
-                <div className="bg-white p-3 pb-6 rounded-lg shadow-lg transform rotate-[-3deg] transition-transform duration-300 hover:rotate-0 hover:scale-105 hover:z-20 cursor-pointer">
-                  <div className="relative w-full aspect-square bg-neutral-100 rounded overflow-hidden">
-                    <Image
-                      src="/images/album1.webp"
-                      alt="A Jar of Wishes"
-                      fill
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                      className="object-cover animate-fade-in"
-                      style={{ objectPosition: "center 10%" }}
-                    />
-                  </div>
-                  <p className="font-display italic text-xs text-neutral-800 text-center mt-3 font-semibold">
-                    A Jar of Wishes
-                  </p>
-                </div>
-
-                {/* Polaroid 2 (Local Image) */}
-                <div className="bg-white p-3 pb-6 rounded-lg shadow-lg transform rotate-[1deg] transition-transform duration-300 hover:rotate-0 hover:scale-105 hover:z-20 cursor-pointer">
-                  <div className="relative w-full aspect-square bg-neutral-100 rounded overflow-hidden">
-                    <Image
-                      src="/images/album2.webp"
-                      alt="The Night We Met"
-                      fill
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                      className="object-cover animate-fade-in"
-                      style={{ objectPosition: "center 10%" }}
-                    />
-                  </div>
-                  <p className="font-display italic text-xs text-neutral-800 text-center mt-3 font-semibold">
-                    The Night We Met
-                  </p>
-                </div>
-
-                {/* Polaroid 3 (Local Image) */}
-                <div className="bg-white p-3 pb-6 rounded-lg shadow-lg transform rotate-[4deg] transition-transform duration-300 hover:rotate-0 hover:scale-105 hover:z-20 cursor-pointer">
-                  <div className="relative w-full aspect-square bg-neutral-100 rounded overflow-hidden">
-                    <Image
-                      src="/images/album3.webp"
-                      alt="Best Friends Always"
-                      fill
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                      className="object-cover animate-fade-in"
-                      style={{ objectPosition: "center 15%" }}
-                    />
-                  </div>
-                  <p className="font-display italic text-xs text-neutral-800 text-center mt-3 font-semibold">
-                    Best Friends Always
-                  </p>
-                </div>
+              <div className="w-full mt-4">
+                <PhotoGallery items={ALBUM_ITEMS} />
               </div>
             </div>
 
