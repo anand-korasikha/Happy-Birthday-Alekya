@@ -184,15 +184,16 @@ export default function Home() {
               </h3>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 w-full mt-4">
-                {/* Polaroid 1 (The Generated Illustration) */}
+                {/* Polaroid 1 (Local Image) */}
                 <div className="bg-white p-3 pb-6 rounded-lg shadow-lg transform rotate-[-3deg] transition-transform duration-300 hover:rotate-0 hover:scale-105 hover:z-20 cursor-pointer">
                   <div className="relative w-full h-40 bg-neutral-100 rounded overflow-hidden">
                     <Image
-                      src="/celestial_jar.png"
-                      alt="Celestial Star Jar"
+                      src="/images/album1.webp"
+                      alt="A Jar of Wishes"
                       fill
                       sizes="(max-width: 768px) 100vw, 33vw"
-                      className="object-cover"
+                      className="object-cover animate-fade-in"
+                      style={{ objectPosition: "center 15%" }}
                     />
                   </div>
                   <p className="font-display italic text-xs text-neutral-800 text-center mt-3 font-semibold">
@@ -200,15 +201,16 @@ export default function Home() {
                   </p>
                 </div>
 
-                {/* Polaroid 2 */}
+                {/* Polaroid 2 (Local Image) */}
                 <div className="bg-white p-3 pb-6 rounded-lg shadow-lg transform rotate-[1deg] transition-transform duration-300 hover:rotate-0 hover:scale-105 hover:z-20 cursor-pointer">
                   <div className="relative w-full h-40 bg-neutral-100 rounded overflow-hidden">
                     <Image
-                      src="https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?q=80&w=600&auto=format&fit=crop"
-                      alt="Starry Night"
+                      src="/images/album2.webp"
+                      alt="The Night We Met"
                       fill
                       sizes="(max-width: 768px) 100vw, 33vw"
-                      className="object-cover"
+                      className="object-cover animate-fade-in"
+                      style={{ objectPosition: "center 15%" }}
                     />
                   </div>
                   <p className="font-display italic text-xs text-neutral-800 text-center mt-3 font-semibold">
@@ -216,15 +218,16 @@ export default function Home() {
                   </p>
                 </div>
 
-                {/* Polaroid 3 */}
+                {/* Polaroid 3 (Local Image) */}
                 <div className="bg-white p-3 pb-6 rounded-lg shadow-lg transform rotate-[4deg] transition-transform duration-300 hover:rotate-0 hover:scale-105 hover:z-20 cursor-pointer">
                   <div className="relative w-full h-40 bg-neutral-100 rounded overflow-hidden">
                     <Image
-                      src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=600&auto=format&fit=crop"
-                      alt="Field of Roses"
+                      src="/images/album3.webp"
+                      alt="Best Friends Always"
                       fill
                       sizes="(max-width: 768px) 100vw, 33vw"
-                      className="object-cover"
+                      className="object-cover animate-fade-in"
+                      style={{ objectPosition: "center 15%" }}
                     />
                   </div>
                   <p className="font-display italic text-xs text-neutral-800 text-center mt-3 font-semibold">

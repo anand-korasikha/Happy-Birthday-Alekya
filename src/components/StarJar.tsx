@@ -11,6 +11,8 @@ interface Memory {
   x: string; // Position inside jar
   y: string;
   delay: string; // Float animation delay
+  image?: string;
+  objectPosition?: string;
 }
 
 interface StarJarProps {
@@ -26,6 +28,8 @@ const MEMORIES: Memory[] = [
     x: "28%",
     y: "40%",
     delay: "0s",
+    image: "/images/memory1.webp",
+    objectPosition: "center 10%",
   },
   {
     id: 2,
@@ -35,6 +39,8 @@ const MEMORIES: Memory[] = [
     x: "65%",
     y: "35%",
     delay: "1.5s",
+    image: "/images/memory2.webp",
+    objectPosition: "center 10%",
   },
   {
     id: 3,
@@ -44,6 +50,8 @@ const MEMORIES: Memory[] = [
     x: "48%",
     y: "55%",
     delay: "0.8s",
+    image: "/images/memory3.webp",
+    objectPosition: "center 10%",
   },
   {
     id: 4,
@@ -53,6 +61,8 @@ const MEMORIES: Memory[] = [
     x: "32%",
     y: "70%",
     delay: "2.2s",
+    image: "/images/memory4.webp",
+    objectPosition: "center 10%",
   },
   {
     id: 5,
@@ -62,6 +72,8 @@ const MEMORIES: Memory[] = [
     x: "62%",
     y: "72%",
     delay: "1.2s",
+    image: "/images/memory5.webp",
+    objectPosition: "center 10%",
   },
 ];
 
@@ -192,23 +204,38 @@ export default function StarJar({ onComplete }: StarJarProps) {
 
             {/* Polaroid Frame */}
             <div className="w-full bg-white p-4 pb-8 rounded-lg shadow-lg flex flex-col items-center transform rotate-[-2deg]">
-              {/* Image Placeholder - Drawing a gorgeous heart icon inside */}
+              {/* Image Placeholder - Drawing a gorgeous heart icon inside or showing image */}
               <div
-                className="w-full h-44 rounded bg-rose-50 flex items-center justify-center relative overflow-hidden"
+                className="w-full aspect-square rounded-sm bg-rose-50 flex items-center justify-center relative overflow-hidden"
                 style={{
                   background: `linear-gradient(135deg, ${activeMemory.color}22 0%, ${activeMemory.color}55 100%)`,
                 }}
               >
                 <div className="absolute inset-0 bg-mesh opacity-20"></div>
-                <svg
-                  className="w-20 h-20 animate-pulse"
-                  style={{ color: activeMemory.color, filter: `drop-shadow(0 0 10px ${activeMemory.color}88)` }}
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                </svg>
-                <span className="absolute bottom-2 right-2 text-xs font-display italic text-velvet-dark/70 font-semibold">
+                {activeMemory.image ? (
+                  <img
+                    src={activeMemory.image}
+                    alt={activeMemory.title}
+                    className="w-full h-full object-cover animate-fade-in"
+                    style={{
+                      objectPosition: activeMemory.objectPosition || "center 10%",
+                    }}
+                  />
+                ) : (
+                  <svg
+                    className="w-20 h-20 animate-pulse"
+                    style={{ color: activeMemory.color, filter: `drop-shadow(0 0 10px ${activeMemory.color}88)` }}
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                  </svg>
+                )}
+                <span className={`absolute bottom-2 right-2 text-xs font-display italic font-semibold ${
+                  activeMemory.image
+                    ? "text-white bg-black/45 backdrop-blur-[2px] px-2 py-0.5 rounded shadow-sm"
+                    : "text-velvet-dark/70"
+                }`}>
                   Memory #{activeMemory.id}
                 </span>
               </div>
