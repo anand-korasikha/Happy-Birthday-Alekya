@@ -17,6 +17,7 @@ export default function PhotoGallery({ items }: PhotoGalleryProps) {
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
 
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev + 1) % items.length);
@@ -25,6 +26,17 @@ export default function PhotoGallery({ items }: PhotoGalleryProps) {
   const prevSlide = () => {
     setCurrentIndex((prev) => (prev - 1 + items.length) % items.length);
   };
+
+  // Autoplay auto flow
+  useEffect(() => {
+    if (isLightboxOpen || isPaused) return;
+
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 3500); // Transitions every 3.5 seconds
+
+    return () => clearInterval(interval);
+  }, [currentIndex, isLightboxOpen, isPaused]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -48,6 +60,7 @@ export default function PhotoGallery({ items }: PhotoGalleryProps) {
   // Touch swipe support
   const handleTouchStart = (e: React.TouchEvent) => {
     setTouchStart(e.touches[0].clientX);
+    setIsPaused(true); // Pause on touch
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
@@ -64,10 +77,19 @@ export default function PhotoGallery({ items }: PhotoGalleryProps) {
     }
   };
 
+  const handleTouchEnd = () => {
+    setIsPaused(false); // Resume after touch ends
+  };
+
   const translateOffset = isMobile ? 70 : 130;
 
   return (
-    <div className="w-full flex flex-col items-center">
+    <div 
+      className="w-full flex flex-col items-center"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      onTouchEnd={handleTouchEnd}
+    >
       {/* 3D Stack Stage */}
       <div 
         className="relative w-full max-w-xl h-[360px] sm:h-[420px] flex items-center justify-center overflow-hidden px-4"
