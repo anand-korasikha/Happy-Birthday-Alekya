@@ -1,65 +1,253 @@
+"use client";
+
+import React, { useState, useRef } from "react";
+import HeartConfetti from "@/components/HeartConfetti";
+import MusicPlayer from "@/components/MusicPlayer";
+import StarJar from "@/components/StarJar";
+import CakeSection from "@/components/CakeSection";
+import { Sparkles, Heart } from "lucide-react";
 import Image from "next/image";
 
+type Stage = "intro" | "jar" | "cake" | "reveal";
+
 export default function Home() {
+  const [stage, setStage] = useState<Stage>("intro");
+  const [musicPlaying, setMusicPlaying] = useState(false);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  // Transition from wax letter to jar
+  const handleOpenLetter = () => {
+    setMusicPlaying(true);
+    if (videoRef.current) {
+      videoRef.current.play().catch((err) => {
+        console.warn("Video play failed or was blocked:", err);
+      });
+    }
+    setStage("jar");
+  };
+
+  // Transition from jar to cake
+  const handleJarComplete = () => {
+    setStage("cake");
+  };
+
+  // Transition from cake to grand reveal
+  const handleCakeComplete = () => {
+    setStage("reveal");
+  };
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <div className="relative flex flex-col flex-1 min-h-screen items-center justify-center overflow-hidden">
+      {/* Background Mesh styling (Fallback at bottom-most level) */}
+      <div className="bg-mesh !z-[-10] pointer-events-none"></div>
+
+      {/* Background Video */}
+      <video
+        ref={videoRef}
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="fixed inset-0 w-full h-full object-cover z-[-5] pointer-events-none opacity-50"
+      >
+        <source src="/vedio.webm" type="video/webm" />
+      </video>
+
+      {/* Dark tint overlay for video legibility */}
+      <div className="fixed inset-0 bg-gradient-to-b from-velvet-dark/80 via-velvet-medium/40 to-velvet-dark/90 z-[-2] pointer-events-none"></div>
+
+      {/* Background celestial glow particles */}
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-900/10 rounded-full blur-[100px] pointer-events-none"></div>
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-indigo-900/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+      {/* Floating Canvas Confetti (Active in the final reveal stage) */}
+      <HeartConfetti active={stage === "reveal"} />
+
+      {/* Floating Record Player (Mounted early for autoplay gesture propagation) */}
+      <div className={`transition-all duration-700 ${stage === "intro" ? "opacity-0 pointer-events-none translate-y-4" : "opacity-100"}`}>
+        <MusicPlayer isPlaying={musicPlaying} setIsPlaying={setMusicPlaying} currentStage={stage} />
+      </div>
+
+      {/* Main Experience Router */}
+      <main className="flex flex-col flex-1 w-full items-center justify-center py-12 px-6 z-10">
+        
+        {/* Stage 0: Wax-Sealed Intro Letter */}
+        {stage === "intro" && (
+          <div className="w-full max-w-lg flex flex-col items-center justify-center animate-fade-in-up text-center px-4">
+            <div className="mb-6">
+              <span className="text-xs uppercase tracking-widest text-gold-accent font-semibold px-3 py-1 rounded-full bg-gold-accent/10 border border-gold-accent/30 font-body">
+                A special invitation
+              </span>
+            </div>
+            
+            <h1 className="text-4xl md:text-5xl font-display font-bold text-text-champagne mb-8 leading-tight">
+              For My Favorite Person, <br/>
+              <span className="text-gold-accent text-5xl md:text-6xl tracking-wide font-display italic gold-glow block mt-2">
+                Alekya
+              </span>
+            </h1>
+
+            {/* Sealed Envelope Graphic */}
+            <div className="relative w-80 h-48 bg-gradient-to-br from-velvet-light to-velvet-dark border border-gold-accent/20 rounded-2xl shadow-[0_15px_35px_rgba(0,0,0,0.5)] flex items-center justify-center transition-all duration-500 hover:shadow-[0_20px_45px_rgba(56,189,248,0.15)] group">
+              {/* Back flap lines */}
+              <div className="absolute inset-0 bg-transparent border-t-[96px] border-t-white/[0.03] border-x-[160px] border-x-transparent border-b-[96px] border-b-transparent rounded-2xl pointer-events-none"></div>
+              
+              {/* Wax Seal Button */}
+              <button
+                onClick={handleOpenLetter}
+                className="absolute w-16 h-16 rounded-full bg-gradient-to-br from-blue-700 to-indigo-900 border-2 border-blue-500 shadow-[0_4px_12px_rgba(0,0,0,0.3)] flex items-center justify-center cursor-pointer transform hover:scale-110 active:scale-95 hover:rotate-12 transition-all duration-300 z-10 group-hover:border-gold-accent/50"
+                aria-label="Open Letter"
+              >
+                <div className="relative flex items-center justify-center w-full h-full">
+                  <span className="font-display text-2xl font-bold text-gold-accent select-none gold-glow">
+                    A
+                  </span>
+                  {/* Subtle pulsing seal outline */}
+                  <div className="absolute -inset-1.5 rounded-full border border-gold-accent/20 animate-ping pointer-events-none"></div>
+                </div>
+              </button>
+
+              <span className="absolute bottom-4 text-[10px] tracking-widest text-gold-accent/60 font-body uppercase font-bold">
+                Tap Seal to Unveil
+              </span>
+            </div>
+
+            <p className="mt-8 text-xs text-text-champagne/50 font-body max-w-xs">
+              Make sure your volume is turned up to enjoy the full celestial surprise experience.
+            </p>
+          </div>
+        )}
+
+        {/* Stage 1: Star Memory Jar */}
+        {stage === "jar" && (
+          <StarJar onComplete={handleJarComplete} />
+        )}
+
+        {/* Stage 2: Birthday Cake candle blowing */}
+        {stage === "cake" && (
+          <CakeSection onComplete={handleCakeComplete} />
+        )}
+
+        {/* Stage 3: Grand Surprise Reveal & Love Letter Scroll */}
+        {stage === "reveal" && (
+          <div className="w-full max-w-2xl flex flex-col items-center justify-center animate-fade-in-up py-6 px-4">
+            
+            {/* Celebration Header */}
+            <div className="text-center mb-8 flex flex-col items-center">
+              <div className="w-16 h-16 rounded-full bg-rose-accent/15 flex items-center justify-center mb-4 border border-rose-accent animate-float">
+                <Heart className="text-rose-accent fill-current" size={28} />
+              </div>
+              <h1 className="text-4xl md:text-5xl font-display font-bold text-gold-accent gold-glow tracking-wide mb-2">
+                Happy Birthday, Alekya!
+              </h1>
+              <p className="text-xs uppercase tracking-widest text-rose-accent font-semibold">
+                May your day be as magical as your smile
+              </p>
+            </div>
+
+            {/* Scroll Container */}
+            <div className="w-full glass-panel p-8 md:p-12 rounded-[32px] border-2 border-gold-accent/20 shadow-2xl relative mb-12 before:content-[''] before:absolute before:-inset-0.5 before:rounded-[34px] before:bg-gradient-to-br before:from-gold-accent/20 before:to-rose-accent/10 before:z-[-1] before:opacity-50">
+              {/* Gold borders/decorations inside scroll */}
+              <div className="absolute top-4 left-4 right-4 bottom-4 border border-gold-accent/10 rounded-2xl pointer-events-none"></div>
+
+              {/* The Love Letter */}
+              <div className="flex flex-col font-display text-text-champagne leading-relaxed text-center gap-6 max-w-xl mx-auto py-2 z-10 relative">
+                <p className="text-2xl font-bold tracking-wide italic border-b border-gold-accent/10 pb-4">
+                  Dearest Alekya,
+                </p>
+
+                <p className="text-base md:text-lg font-medium leading-loose text-text-champagne/90">
+                  Today is a celebration of the day you came into this world and made it infinitely more beautiful, kind, and bright. You are my favorite person, my safest harbor, and my greatest adventure.
+                </p>
+
+                <p className="text-base md:text-lg font-medium leading-loose text-text-champagne/90">
+                  Thank you for all the laughter we share, the warmth you bring into my cold days, and the endless support. Thank you for just being you. I cherish every single moment next to you.
+                </p>
+
+                <p className="text-base md:text-lg font-medium leading-loose text-text-champagne/90">
+                  As you blew out your candles, I wished for nothing but your happiness, peace, and that every dream in your heart comes true. I'll be right here, cheering you on and loving you through it all.
+                </p>
+
+                <div className="mt-6 flex flex-col items-center">
+                  <span className="text-lg font-bold italic tracking-wide text-gold-accent">
+                    Happy Birthday, my love! ❤️
+                  </span>
+                  <div className="w-16 h-px bg-gradient-to-r from-transparent via-gold-accent to-transparent mt-4"></div>
+                </div>
+              </div>
+            </div>
+
+            {/* Polaroid Memory Gallery */}
+            <div className="w-full flex flex-col items-center gap-6 mb-8">
+              <h3 className="text-xl font-display font-semibold text-gold-accent uppercase tracking-widest flex items-center gap-2">
+                <Sparkles size={16} /> Our Starry Album <Sparkles size={16} />
+              </h3>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 w-full mt-4">
+                {/* Polaroid 1 (The Generated Illustration) */}
+                <div className="bg-white p-3 pb-6 rounded-lg shadow-lg transform rotate-[-3deg] transition-transform duration-300 hover:rotate-0 hover:scale-105 hover:z-20 cursor-pointer">
+                  <div className="relative w-full h-40 bg-neutral-100 rounded overflow-hidden">
+                    <Image
+                      src="/celestial_jar.png"
+                      alt="Celestial Star Jar"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-cover"
+                    />
+                  </div>
+                  <p className="font-display italic text-xs text-neutral-800 text-center mt-3 font-semibold">
+                    A Jar of Wishes
+                  </p>
+                </div>
+
+                {/* Polaroid 2 */}
+                <div className="bg-white p-3 pb-6 rounded-lg shadow-lg transform rotate-[1deg] transition-transform duration-300 hover:rotate-0 hover:scale-105 hover:z-20 cursor-pointer">
+                  <div className="relative w-full h-40 bg-neutral-100 rounded overflow-hidden">
+                    <Image
+                      src="https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?q=80&w=600&auto=format&fit=crop"
+                      alt="Starry Night"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-cover"
+                    />
+                  </div>
+                  <p className="font-display italic text-xs text-neutral-800 text-center mt-3 font-semibold">
+                    The Night We Met
+                  </p>
+                </div>
+
+                {/* Polaroid 3 */}
+                <div className="bg-white p-3 pb-6 rounded-lg shadow-lg transform rotate-[4deg] transition-transform duration-300 hover:rotate-0 hover:scale-105 hover:z-20 cursor-pointer">
+                  <div className="relative w-full h-40 bg-neutral-100 rounded overflow-hidden">
+                    <Image
+                      src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=600&auto=format&fit=crop"
+                      alt="Field of Roses"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-cover"
+                    />
+                  </div>
+                  <p className="font-display italic text-xs text-neutral-800 text-center mt-3 font-semibold">
+                    Loving You Always
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <button
+              onClick={() => setStage("jar")}
+              className="mt-8 text-xs text-text-champagne/40 hover:text-gold-accent transition-colors duration-300 tracking-wider uppercase font-semibold"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+              Revisit the Memories
+            </button>
+          </div>
+        )}
       </main>
+
+      {/* Footer */}
+      <footer className="py-6 text-center text-[10px] tracking-widest text-text-champagne/30 z-10 font-body uppercase border-t border-white/5 w-full">
+        Designed with love for Alekya • {new Date().getFullYear()}
+      </footer>
     </div>
   );
 }
