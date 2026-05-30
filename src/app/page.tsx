@@ -81,7 +81,7 @@ export default function Home() {
             </div>
             
             <h1 className="text-4xl md:text-5xl font-display font-bold text-text-champagne mb-8 leading-tight">
-              For My Favorite Person, <br/>
+              For My Best Friend, <br/>
               <span className="text-gold-accent text-5xl md:text-6xl tracking-wide font-display italic gold-glow block mt-2">
                 Alekya
               </span>
@@ -157,20 +157,20 @@ export default function Home() {
                 </p>
 
                 <p className="text-base md:text-lg font-medium leading-loose text-text-champagne/90">
-                  Today is a celebration of the day you came into this world and made it infinitely more beautiful, kind, and bright. You are my favorite person, my safest harbor, and my greatest adventure.
+                  Today is a celebration of the day you came into this world and made it infinitely more beautiful, kind, and bright. You are an incredible friend, a constant source of laughter, and a true blessing in my life.
                 </p>
 
                 <p className="text-base md:text-lg font-medium leading-loose text-text-champagne/90">
-                  Thank you for all the laughter we share, the warmth you bring into my cold days, and the endless support. Thank you for just being you. I cherish every single moment next to you.
+                  Thank you for all the laughter we share, the bright energy you bring to every moment, and your endless support. Thank you for just being you. I cherish our friendship so much.
                 </p>
 
                 <p className="text-base md:text-lg font-medium leading-loose text-text-champagne/90">
-                  As you blew out your candles, I wished for nothing but your happiness, peace, and that every dream in your heart comes true. I'll be right here, cheering you on and loving you through it all.
+                  As you blew out your candles, I wished for nothing but your happiness, peace, and that every dream in your heart comes true. I'll always be right here, cheering you on through all your adventures.
                 </p>
 
                 <div className="mt-6 flex flex-col items-center">
                   <span className="text-lg font-bold italic tracking-wide text-gold-accent">
-                    Happy Birthday, my love! ❤️
+                    Happy Birthday, my friend! 🌟
                   </span>
                   <div className="w-16 h-px bg-gradient-to-r from-transparent via-gold-accent to-transparent mt-4"></div>
                 </div>
@@ -228,7 +228,7 @@ export default function Home() {
                     />
                   </div>
                   <p className="font-display italic text-xs text-neutral-800 text-center mt-3 font-semibold">
-                    Loving You Always
+                    Best Friends Always
                   </p>
                 </div>
               </div>

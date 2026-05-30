@@ -20,8 +20,8 @@ interface StarJarProps {
 const MEMORIES: Memory[] = [
   {
     id: 1,
-    title: "The Day We Met",
-    description: "A sky full of stars, but my eyes were only on you. Everything changed that day. You brought a light into my life that has never stopped shining.",
+    title: "Our Great Friendship",
+    description: "A sky full of stars, and finding a friend like you is the brightest highlight of them all. You've brought so much joy, support, and light into my life.",
     color: "#38bdf8",
     x: "28%",
     y: "40%",
@@ -29,8 +29,8 @@ const MEMORIES: Memory[] = [
   },
   {
     id: 2,
-    title: "Our First Date",
-    description: "That nervous laughter, the warm coffee, and how time seemed to slow down. The moment you smiled, I knew you were someone incredibly special.",
+    title: "First Hangout",
+    description: "That nervous laughter, the long conversation, and how easily we clicked. The moment you smiled, I knew we were going to be great friends.",
     color: "#60a5fa",
     x: "65%",
     y: "35%",
@@ -38,8 +38,8 @@ const MEMORIES: Memory[] = [
   },
   {
     id: 3,
-    title: "Late Night Talks",
-    description: "Laughing at silly jokes, talking about everything and nothing until the sun came up. Those hours with you are my absolute favorite times in the world.",
+    title: "Late Night Chats",
+    description: "Laughing at silly jokes, talking about everything and nothing until the sun came up. Those deep conversations with you are my absolute favorite.",
     color: "#818cf8",
     x: "48%",
     y: "55%",
@@ -47,8 +47,8 @@ const MEMORIES: Memory[] = [
   },
   {
     id: 4,
-    title: "Your Beautiful Smile",
-    description: "Your smile is my favorite view in the entire world. It melts away all my stress and instantly makes everything bright and warm.",
+    title: "Your Joyous Laugh",
+    description: "Your laughter is my favorite sound. It lights up any room instantly and has the magical power to cheer anyone up.",
     color: "#a5f3fc",
     x: "32%",
     y: "70%",
@@ -56,8 +56,8 @@ const MEMORIES: Memory[] = [
   },
   {
     id: 5,
-    title: "The Simple Moments",
-    description: "Just holding your hand and sitting in silence. I realized that the safest, happiest place in the world is right next to you.",
+    title: "Simple Fun Times",
+    description: "Just sitting together, sharing a quiet moment, or going on random road trips. The best times are always the simplest ones with you.",
     color: "#93c5fd",
     x: "62%",
     y: "72%",
@@ -123,7 +123,7 @@ export default function StarJar({ onComplete }: StarJarProps) {
               Alekya
             </span>
             <span className="text-[8px] text-gold-accent font-body mt-1">
-              With Love
+              Best Friend
             </span>
             {/* Tag String */}
             <svg className="absolute -left-5 -top-3 w-7 h-6 pointer-events-none" viewBox="0 0 28 24">
