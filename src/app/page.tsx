@@ -5,7 +5,7 @@ import HeartConfetti from "@/components/HeartConfetti";
 import MusicPlayer from "@/components/MusicPlayer";
 import StarJar from "@/components/StarJar";
 import CakeSection from "@/components/CakeSection";
-import { Sparkles, Heart } from "lucide-react";
+import { Sparkles, Heart, RotateCcw } from "lucide-react";
 import Image from "next/image";
 
 type Stage = "intro" | "jar" | "cake" | "reveal";
@@ -239,8 +239,9 @@ export default function Home() {
 
             <button
               onClick={() => setStage("jar")}
-              className="mt-8 text-xs text-text-champagne/40 hover:text-gold-accent transition-colors duration-300 tracking-wider uppercase font-semibold"
+              className="mt-12 btn-premium-revisit"
             >
+              <RotateCcw size={14} className="btn-icon" />
               Revisit the Memories
             </button>
           </div>
